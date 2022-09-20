@@ -3,7 +3,7 @@ const { readFromFile, readAndAppend, writeToFile} = require('../helpers/fsUtils'
 const uuid = require('../helpers/uuid');
 
 app.get('/notes', (req, res) => {
-    if (req.method === 'GET') {
+    if (req.method == 'GET') {
         readFromFile('./db/db.json')
         .then((data) => res.json(JSON.parse(data)));
     }
@@ -20,7 +20,7 @@ app.post('/notes', (req, res) => {
         readAndAppend(newNote, './db/db.json');
         res.json('Note was added');
     } else {
-        throw error;
+        res.error('Failed to add note');
     }
 });
 
