@@ -5,23 +5,23 @@ const uuid = require('../helpers/uuid');
 app.get('/notes', (req, res) => {
     if (req.method === 'GET') {
         readFromFile('./db/db.json')
-        .then((note) => res.json(JSON.parse(note)));
+        .then((data) => res.json(JSON.parse(data)));
     }
 });
 
 app.post('/notes', (req, res) => {
     const { title, text } = req.body;
     if (req.body) {
-        const note = {
+        const newNote = {
             title,
             text,
             id: uuid(),
         };
-        readAndAppend(note, './db/db.json');
+        readAndAppend(newNote, './db/db.json');
         res.json('Note was added');
     } else {
         throw error;
     }
 });
 
-module.exports = api:
+module.exports = app;
