@@ -24,4 +24,13 @@ api.post('/notes', (req, res) => {
     }
 });
 
+api.delete('/notes/:id', async (req, res) => {
+    const deleteNote = req.params.id;
+    var getData = await readFromFile('./db/db.json');
+    getData = JSON.parse(getData);
+    getData = getData.filter(i => i.id !== deleteNote);
+    writeToFile('./db/db.json', getData);
+    res.json('Note deleted');
+});
+
 module.exports = api;
